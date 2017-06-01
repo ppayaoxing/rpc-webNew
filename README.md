@@ -1,2 +1,3 @@
-1.Í¨¹ı mvn mybatis-generator:generate ¿ÉÒÔ°´Êı¾İ¿â±íÉú³ÉÏàÓ¦µÄbeanºÍxmlÎÄ¼ş
-2.Í¨¹ı mvn com.xw:mvPlugin:1.0:mv ¿ÉÒÔ°ÑÉú³ÉµÄÏàÓ¦µÄbeanºÍ½Ó¿ÚÒÆ¶¯µ½rpc-apiÀïÃæ ÒÔ±ã¸üºÃµÄ½øĞĞ´úÂëÕûºÏ£¬Í¨ÓÃ
+ï»¿1.é€šè¿‡ mvn mybatis-generator:generate å¯ä»¥æŒ‰æ•°æ®åº“è¡¨ç”Ÿæˆç›¸åº”çš„beanå’Œxmlæ–‡ä»¶
+
+2.é€šè¿‡ mvn com.xw:mvPlugin:1.0:mv å¯ä»¥æŠŠç”Ÿæˆçš„ç›¸åº”çš„beanå’Œæ¥å£ç§»åŠ¨åˆ°rpc-apié‡Œé¢ ä»¥ä¾¿æ›´å¥½çš„è¿›è¡Œä»£ç æ•´åˆï¼Œé€šç”¨
