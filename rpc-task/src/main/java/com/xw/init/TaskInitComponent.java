@@ -17,6 +17,10 @@ import com.xw.common.QuartzScheduleMgr;
 import com.xw.model.TaskData;
 import com.xw.server.TaskDataService;
 
+/**
+ * 任务初始化 
+ * @author Administrator
+ */
 @SuppressWarnings("unchecked")
 public class TaskInitComponent implements InitializingBean {
 

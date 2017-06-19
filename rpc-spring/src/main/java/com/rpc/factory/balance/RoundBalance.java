@@ -12,7 +12,7 @@ import com.rpc.factory.RpcData;
  */
 public class RoundBalance implements Balance {
 	
-	private ConcurrentHashMap<String, AtomicInteger> sequences = new ConcurrentHashMap();
+	private ConcurrentHashMap<String, AtomicInteger> sequences = new ConcurrentHashMap<>();
 
 	public String getUrl(RpcData rpcData){
 		List<String> urls = rpcData.getUrls();

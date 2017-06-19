@@ -6,7 +6,7 @@ package com.rpc.factory.cluster;
  */
 public enum ClusterType {
 	
-	FAILOVER("failover",new FailOverCluster());
+	FAILOVER("failover",new FailOverCluster()),ASYNC("async",new AsyncCluster());
 	
 	private String name;
 	private Cluster cluster;
@@ -27,6 +27,7 @@ public enum ClusterType {
 	public static Cluster getCluster(String name){
 		switch(name.toLowerCase()){
 			case "failover":return FAILOVER.getCluster();
+			case "async":return ASYNC.getCluster();
 			default : return FAILOVER.getCluster();
 		}
 	}

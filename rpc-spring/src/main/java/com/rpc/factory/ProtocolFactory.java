@@ -1,6 +1,6 @@
 package com.rpc.factory;
 
-import com.rpc.factory.protocol.HessianProtocol;
+import com.rpc.factory.protocol.ProType;
 import com.rpc.factory.protocol.Protocol;
 
 /**
@@ -19,7 +19,8 @@ public class ProtocolFactory {
 		return ProtocolSingle.instance;
 	}
 
-	public Protocol getProtocol(){
-		return new HessianProtocol();
+	public Protocol getProtocol(String protocol) throws InstantiationException, IllegalAccessException{
+		ProType type = ProType.getProType(protocol);
+		return type.getObj();
 	}
 }

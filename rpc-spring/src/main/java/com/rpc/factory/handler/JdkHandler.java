@@ -18,19 +18,21 @@ public class JdkHandler implements Handler {
 	private Balance balance;//负载均衡
 	private Class<?> clazz;//代理对象字节
 	private String url;//地址
+	private int timeout;
 	
-	public JdkHandler(Cluster cluster, Protocol protocol, Class<?> clazz, String url,Balance balance) {
+	public JdkHandler(Cluster cluster, Protocol protocol, Class<?> clazz, String url,Balance balance,int timeout) {
 		super();
 		this.cluster = cluster;
 		this.protocol = protocol;
 		this.clazz = clazz;
 		this.url = url;
 		this.balance = balance;
+		this.timeout = timeout;
 	}
 
 	@Override
 	public Object exec(Method method, Object[] args) throws Exception {
-		return cluster.cluster(balance,protocol, new RpcData(method, args,clazz, url));
+		return cluster.cluster(balance,protocol, new RpcData(method, args,clazz, url,this.timeout));
 	}
 
 }

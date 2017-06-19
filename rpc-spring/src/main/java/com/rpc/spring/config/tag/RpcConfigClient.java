@@ -31,19 +31,37 @@ public class RpcConfigClient implements FactoryBean<Object>,InitializingBean {
 	
 	private String cluster="failover";//请求机制
 	private String balance="round";//负载均衡
+	private String protocol="hessian";//
 	
 	private ProxyFactory proxyFactory = ProxyFactory.getProxyFactory();//代理工厂
 	private ClusterFactory clusterFactory =  ClusterFactory.getClusterFactory();//请求机制
 	private ProtocolFactory protocolFactory = ProtocolFactory.getProtocolFactory();//协议
 	private BalanceFactory balanceFactory = BalanceFactory.getBalanceFactory();//负载均衡
+	private int timeout = 10*60*1000;
 
 	
+	public String getProtocol() {
+		return protocol;
+	}
+
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
+
 	public String getBalance() {
 		return balance;
 	}
 
 	public void setBalance(String balance) {
 		this.balance = balance;
+	}
+
+	public int getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
 	}
 
 	public String getCluster() {
@@ -96,10 +114,16 @@ public class RpcConfigClient implements FactoryBean<Object>,InitializingBean {
 	 * 创建代理对象
 	 */
 	private void createProxy() {
-		Handler handler = new JdkHandler(clusterFactory.getCluster(this.cluster), 
-				protocolFactory.getProtocol(), getObjectType(), this.url,balanceFactory.getBalance(balance));
-		this.proxyObj = Proxy.newProxyInstance(ClassUtils.getDefaultClassLoader(), new Class<?>[]{getObjectType()},
-				proxyFactory.getProxy(handler));
+		Handler handler;
+		try {
+			handler = new JdkHandler(clusterFactory.getCluster(this.cluster), 
+					protocolFactory.getProtocol(protocol), getObjectType(), this.url,balanceFactory.getBalance(balance),this.timeout);
+			this.proxyObj = Proxy.newProxyInstance(ClassUtils.getDefaultClassLoader(), new Class<?>[]{getObjectType()},
+					proxyFactory.getProxy(handler));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

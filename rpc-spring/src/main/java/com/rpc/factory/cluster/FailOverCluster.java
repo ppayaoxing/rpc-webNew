@@ -2,6 +2,7 @@ package com.rpc.factory.cluster;
 
 import java.lang.reflect.Method;
 
+import com.rpc.factory.ParamsData;
 import com.rpc.factory.RpcData;
 import com.rpc.factory.balance.Balance;
 import com.rpc.factory.protocol.Protocol;
@@ -20,7 +21,8 @@ public class FailOverCluster implements Cluster {
 				try{
 				 Class<?> clazz = rpcData.getClazz();
 				 String url = balance.getUrl(rpcData);
-				 Object proxy = protocol.refer(clazz,url);
+				 Object proxy = protocol.refer(clazz,url
+						 ,new ParamsData(rpcData.getClazz().getName(),rpcData.getMethodName(),rpcData.getTimeout(),rpcData.getClusterKey(),rpcData.getParameterType()));
 				 Method method = proxy.getClass().getMethod(rpcData.getMethodName(), rpcData.getParameterType());
 	             return method.invoke(proxy, rpcData.getArgs());
 				}catch(Exception e){

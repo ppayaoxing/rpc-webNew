@@ -55,7 +55,7 @@
     
     <servlet>
     	<servlet-name>hessian</servlet-name>
-    	<servlet-class>com.rpc.http.HessianDispatcher</servlet-class>
+    	<servlet-class>com.rpc.http.ServerDispatcher</servlet-class>
     	 <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>

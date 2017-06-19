@@ -10,6 +10,10 @@ import org.w3c.dom.Element;
 
 import com.rpc.spring.constant.Constant;
 
+/**
+ * 客户端标签解析
+ * @author Administrator
+ */
 public class RpcCommonClientBeanDefinitionParser implements BeanDefinitionParser {
 	
 private static Logger logger = LoggerFactory.getLogger(RpcCommonClientBeanDefinitionParser.class);
@@ -50,6 +54,10 @@ private static Logger logger = LoggerFactory.getLogger(RpcCommonClientBeanDefini
 		rootBean.getPropertyValues().add(Constant.NAME, element.getAttribute(Constant.NAME));
 		rootBean.getPropertyValues().add(Constant.INTERFACECLASS, element.getAttribute(Constant.INTERFACECLASS));
 		rootBean.getPropertyValues().add(Constant.URL, element.getAttribute(Constant.URL));
+		rootBean.getPropertyValues().add(Constant.TIMEOUT, element.getAttribute(Constant.TIMEOUT));
+		rootBean.getPropertyValues().add(Constant.PROTOCOL, element.getAttribute(Constant.PROTOCOL));
+		rootBean.getPropertyValues().add(Constant.CLUSTER, element.getAttribute(Constant.CLUSTER));
+		rootBean.getPropertyValues().add(Constant.BALANCE, element.getAttribute(Constant.BALANCE));
 		return rootBean;
 	}
 

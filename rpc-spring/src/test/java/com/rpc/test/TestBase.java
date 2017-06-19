@@ -1,4 +1,4 @@
-/*package com.rpc.test;
+package com.rpc.test;
 
 
 
@@ -11,4 +11,3 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestBase {
 
 }
-*/

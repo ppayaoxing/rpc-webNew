@@ -14,10 +14,10 @@ import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
 
-/** 
- * 一个简单的quartz任务管理器 
- * 
- */  
+/**
+ * 一个简单的quartz任务管理器   
+ * @author Administrator
+ */
 public class QuartzScheduleMgr {  
     private static  Scheduler scheduler=getScheduler();  
     /** 

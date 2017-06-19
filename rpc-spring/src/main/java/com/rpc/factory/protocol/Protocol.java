@@ -1,7 +1,13 @@
 package com.rpc.factory.protocol;
 
+import com.rpc.factory.ParamsData;
+
+/**
+ * 协议 
+ * @author Administrator
+ */
 public interface Protocol {
 
-	public <T> T refer(Class<T> clazz,String url) throws Exception;
+	public <T> T refer(Class<T> clazz,String url,ParamsData params) throws Exception;
 	
 }
