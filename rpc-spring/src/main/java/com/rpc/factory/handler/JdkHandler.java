@@ -19,8 +19,9 @@ public class JdkHandler implements Handler {
 	private Class<?> clazz;//代理对象字节
 	private String url;//地址
 	private int timeout;
+	private String interfaceClass; 
 	
-	public JdkHandler(Cluster cluster, Protocol protocol, Class<?> clazz, String url,Balance balance,int timeout) {
+	public JdkHandler(Cluster cluster, Protocol protocol, Class<?> clazz, String url,Balance balance,int timeout,String interfaceClass) {
 		super();
 		this.cluster = cluster;
 		this.protocol = protocol;
@@ -28,11 +29,12 @@ public class JdkHandler implements Handler {
 		this.url = url;
 		this.balance = balance;
 		this.timeout = timeout;
+		this.interfaceClass = interfaceClass;
 	}
 
 	@Override
 	public Object exec(Method method, Object[] args) throws Exception {
-		return cluster.cluster(balance,protocol, new RpcData(method, args,clazz, url,this.timeout));
+		return cluster.cluster(balance,protocol, new RpcData(method, args,clazz, url,this.timeout,this.interfaceClass));
 	}
 
 }

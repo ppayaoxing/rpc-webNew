@@ -117,7 +117,7 @@ public class RpcConfigClient implements FactoryBean<Object>,InitializingBean {
 		Handler handler;
 		try {
 			handler = new JdkHandler(clusterFactory.getCluster(this.cluster), 
-					protocolFactory.getProtocol(protocol), getObjectType(), this.url,balanceFactory.getBalance(balance),this.timeout);
+					protocolFactory.getProtocol(protocol), getObjectType(), this.url,balanceFactory.getBalance(balance),this.timeout,this.interfaceClass);
 			this.proxyObj = Proxy.newProxyInstance(ClassUtils.getDefaultClassLoader(), new Class<?>[]{getObjectType()},
 					proxyFactory.getProxy(handler));
 		} catch (Exception e) {

@@ -11,11 +11,12 @@ import java.lang.reflect.Proxy;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpClientParams;
+import org.apache.http.HttpStatus;
 
 import com.rpc.factory.ParamsData;
 
 public class HttpFactory {
-
 
 	private ParamsData params;
 
@@ -48,30 +49,38 @@ class Handler implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		//构造请求
 		HttpClient httpClient = new HttpClient(); 
 		PostMethod post = new PostMethod(this.url);
+		//添加请求参数
+		HttpClientParams params = new HttpClientParams();
+		params.setConnectionManagerTimeout(this.factory.getParams().getTimeout());
+		httpClient.setParams(params);
 		this.factory.getParams().setValues(args);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(baos);
+		
+		//发送请求
+		byte[] data = new byte[]{};
+		try(ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+			data = baos.toByteArray();
 			oos.writeObject(this.factory.getParams());
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		byte[] data = baos.toByteArray();
-		ByteArrayInputStream bis = new ByteArrayInputStream(data);
-//		post.setRequestBody(bis);
-		post.setRequestEntity(new InputStreamRequestEntity(bis));
-		try {
-			httpClient.executeMethod(post);
+		//获取响应
+		try (ByteArrayInputStream bis = new ByteArrayInputStream(data)){
+			post.setRequestEntity(new InputStreamRequestEntity(bis));
+			int statusCode = httpClient.executeMethod(post);
+			if(statusCode != HttpStatus.SC_OK){
+				throw new Exception("响应码：" + statusCode);
+			}
 			ObjectInputStream objIn = new ObjectInputStream(post.getResponseBodyAsStream());
 			Object result = objIn.readObject();
 			return result;
-		} catch (Throwable e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw e;
 		} finally {
 			post.releaseConnection();
 		}
-		return null;
 	}
 }

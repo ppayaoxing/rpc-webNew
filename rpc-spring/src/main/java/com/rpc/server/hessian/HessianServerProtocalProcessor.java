@@ -19,7 +19,6 @@ import com.rpc.util.ObjectCacheUtils;
 
 /**
  * hessian
- * @author Administrator
  */
 public class HessianServerProtocalProcessor implements ServerProtocolProcessor {
 
@@ -76,7 +75,6 @@ public class HessianServerProtocalProcessor implements ServerProtocolProcessor {
 
 	/**
 	 * 后置拦截
-	 * 
 	 * @param request
 	 * @param response
 	 */

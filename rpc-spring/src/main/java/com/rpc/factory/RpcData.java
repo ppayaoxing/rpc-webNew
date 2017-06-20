@@ -1,7 +1,7 @@
 package com.rpc.factory;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.rpc.util.ObjectCacheUtils;
@@ -14,14 +14,16 @@ public class RpcData {
 	private String url;
 	private List<String> urls = null;
 	private int timeout;
+	private String interfaceClass; 
 	
-	public RpcData(Method method, Object[] args, Class<?> clazz, String url,int timeout) {
+	public RpcData(Method method, Object[] args, Class<?> clazz, String url,int timeout,String interfaceClass) {
 		super();
 		this.method = method;
 		this.args = args;
 		this.clazz = clazz;
 		this.url = url;
 		this.timeout = timeout;
+		this.interfaceClass = interfaceClass;
 	}
 
 	
@@ -47,15 +49,19 @@ public class RpcData {
 	}
 
 	public List<String> getUrls() {
-		if(urls!=null)
-			return urls;
+		if(this.urls != null)
+			return this.urls;
+		this.urls = new ArrayList<String>();
 		if(this.url.indexOf(";") != -1){
-			return Arrays.asList(this.url.split(";"));
+			String[] strs = this.url.split(";");
+			for(String str : strs){
+				this.urls.add(str + interfaceClass);
+			}
+		}else{
+			this.urls.add(url + interfaceClass);
 		}
-		return Arrays.asList(new String[]{this.url});
+		return this.urls;
 	}
-	
-	
 	
 	public String getClusterKey(){
 		return clazz.getName()+"_"+method.getName()+"."+ObjectCacheUtils.getParameterNames(getParameterType());

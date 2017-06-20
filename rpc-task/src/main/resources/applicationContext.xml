@@ -25,6 +25,6 @@
     <bean class="com.xw.init.TaskInitComponent" />
     
     <rpcCommon:rpcCommonClient id="taskDataService" interfaceClass="com.xw.server.TaskDataService" 
-    url="http://192.168.0.73:8080/rpc-server/com.xw.server.TaskDataService;http://192.168.0.25:8080/rpc-server/com.xw.server.TaskDataService"/>
+    		url="http://192.168.0.73:8080/rpc-server/;http://192.168.0.25:8080/rpc-server/"/>
     
 </beans>  

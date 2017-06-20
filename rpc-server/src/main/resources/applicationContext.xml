@@ -74,8 +74,8 @@
      <bean id="taskDataServiceImpl" class="com.xw.server.impl.TaskDataServiceImpl"/>
      <rpcCommon:rpcCommonServer interfaceClass="com.xw.server.TaskDataService" ref="taskDataServiceImpl" />
      
-     <!-- <bean id="authIpInterceptorRule" class="com.xw.rule.AuthIpInterceptorRule" /> -->
      <bean class="com.rpc.spring.InterceptorInitializing"/>
+     <!-- <bean id="authIpInterceptorRule" class="com.xw.rule.AuthIpInterceptorRule" /> -->
      
    <!--   <bean id="rpcDataServiceImpl" class="com.xw.server.impl.RpcDataServiceImpl"/>
      <rpcCommon:rpcCommonServer interfaceClass="com.xw.server.RpcDataService" ref="rpcDataServiceImpl" /> -->

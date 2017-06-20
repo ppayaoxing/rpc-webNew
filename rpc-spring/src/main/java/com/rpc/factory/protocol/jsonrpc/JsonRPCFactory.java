@@ -4,22 +4,18 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.rpc.factory.ParamsData;
-
-import javafx.beans.property.MapPropertyBase;
 
 public class JsonRPCFactory {
 
@@ -55,21 +51,27 @@ class Handler implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		HttpClient httpClient = HttpClientBuilder.create().build();
+		//构造请求
+		HttpClient httpClient = HttpClientBuilder.create()
+				.setConnectionTimeToLive(this.factory.getParams().getTimeout()
+				, TimeUnit.MILLISECONDS).build();
 		HttpPost httpPost = new HttpPost(this.url);
+		//设置参数
 		BaseParams params = new BaseParams();
 		params = params.build(Class.forName(this.factory.getParams().getClazz()), method, args);
 		String content = objectMapper.writeValueAsString(params);
 		httpPost.addHeader("Content-type", "application/json; charset=utf-8");
 		httpPost.setHeader("Accept", "application/json");
 		httpPost.setEntity(new StringEntity(content, Charset.forName("UTF-8")));
+		//发送
 		HttpResponse response = httpClient.execute(httpPost);
 		int statusCode = response.getStatusLine().getStatusCode();
 		if (statusCode != HttpStatus.SC_OK) {
+			throw new Exception("响应码：" + statusCode);
 		}
 		String body = EntityUtils.toString(response.getEntity());
 		if (body.contains("error")) {
-			return null;
+			throw new Exception(body);
 		}
 		Result<?> result = objectMapper.readValue(body, objectMapper.getTypeFactory()
 				.constructParametricType(Result.class,method.getReturnType()));
