@@ -1,4 +1,4 @@
-package com.rpc.server;
+package com.rpc.http;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

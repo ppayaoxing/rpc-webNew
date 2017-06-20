@@ -22,7 +22,8 @@ public class FailOverCluster implements Cluster {
 				 Class<?> clazz = rpcData.getClazz();
 				 String url = balance.getUrl(rpcData);
 				 Object proxy = protocol.refer(clazz,url
-						 ,new ParamsData(rpcData.getClazz().getName(),rpcData.getMethodName(),rpcData.getTimeout(),rpcData.getClusterKey(),rpcData.getParameterType()));
+						 ,new ParamsData(rpcData.getClazz().getName(),rpcData.getMethodName(),rpcData.getTimeout()
+								 ,rpcData.getClusterKey(),rpcData.getParameterType(),rpcData.getArgs()));
 				 Method method = proxy.getClass().getMethod(rpcData.getMethodName(), rpcData.getParameterType());
 	             return method.invoke(proxy, rpcData.getArgs());
 				}catch(Exception e){

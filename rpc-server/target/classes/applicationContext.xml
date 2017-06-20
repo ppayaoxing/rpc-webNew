@@ -69,7 +69,7 @@
     <bean id="userDowngradeProcessorImpl" class="com.test.rpc.UserDowngradeProcessorImpl"/>
     <bean id="userServiceImpl" class="com.test.rpc.impl.UserServiceImpl"/>
 	<rpcCommon:rpcCommonServer interfaceClass="com.test.rpc.UserService" ref="userServiceImpl" 
-			downgrade="false" downgradeProcessor="userDowngradeProcessorImpl" protocol="jsonRPC"/>
+			downgrade="true" downgradeProcessor="userDowngradeProcessorImpl" protocol="hessian"/>
      
      <bean id="taskDataServiceImpl" class="com.xw.server.impl.TaskDataServiceImpl"/>
      <rpcCommon:rpcCommonServer interfaceClass="com.xw.server.TaskDataService" ref="taskDataServiceImpl" />

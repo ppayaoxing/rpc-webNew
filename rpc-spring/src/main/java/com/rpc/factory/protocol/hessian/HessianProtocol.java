@@ -9,7 +9,7 @@ public class HessianProtocol implements Protocol{
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T refer(Class<T> clazz, String url,ParamsData params) throws Exception {
-		  HessianProxyFactory hessianProxyFactory =NewHessianProxyFactory.getHessianProxyFactory(params.getParams());
+		  HessianProxyFactory hessianProxyFactory =NewHessianProxyFactory.getHessianProxyFactory(params);
 	      hessianProxyFactory.setConnectTimeout(params.getTimeout());
 	      hessianProxyFactory.setReadTimeout(params.getTimeout());
        return (T) hessianProxyFactory.create(clazz, url, Thread.currentThread().getContextClassLoader());

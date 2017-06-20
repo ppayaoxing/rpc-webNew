@@ -8,8 +8,6 @@ import com.rpc.factory.cluster.Cluster;
 import com.rpc.factory.protocol.Protocol;
 
 /**
- * hessian处理
- * @author Administrator
  */
 public class JdkHandler implements Handler {
 

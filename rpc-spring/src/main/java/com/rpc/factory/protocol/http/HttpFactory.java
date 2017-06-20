@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
@@ -56,8 +58,8 @@ class Handler implements InvocationHandler {
 		HttpClientParams params = new HttpClientParams();
 		params.setConnectionManagerTimeout(this.factory.getParams().getTimeout());
 		httpClient.setParams(params);
+		addHeaders(post); 
 		this.factory.getParams().setValues(args);
-		
 		//发送请求
 		byte[] data = new byte[]{};
 		try(ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -82,5 +84,14 @@ class Handler implements InvocationHandler {
 		} finally {
 			post.releaseConnection();
 		}
+	}
+
+	private void addHeaders(PostMethod post) {
+		Map<String,String> headerParams = this.factory.getParams().getHeaderParams();
+		Set<String> keySet = headerParams.keySet();  
+        for (String key : keySet) {  
+             // 向报文头中添加参数  
+           post.addRequestHeader(key, headerParams.get(key));
+        }
 	}
 }

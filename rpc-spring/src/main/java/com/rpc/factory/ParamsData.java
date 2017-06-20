@@ -15,13 +15,14 @@ public class ParamsData implements Serializable{
 	private Class<?>[] parameterTypes;
 	private Object[] values;
 	
-	public ParamsData(String clazz, String methodName, int timeout,String clusterKey,Class<?>[] parameterTypes) {
+	public ParamsData(String clazz, String methodName, int timeout,String clusterKey,Class<?>[] parameterTypes,Object[] values) {
 		super();
 		this.clazz = clazz;
 		this.methodName = methodName;
 		this.timeout = timeout;
 		this.clusterKey = clusterKey;
 		this.parameterTypes = parameterTypes;
+		this.values = values;
 	}
 	public String getClazz() {
 		return clazz;
@@ -62,7 +63,7 @@ public class ParamsData implements Serializable{
 	public void setValues(Object[] values) {
 		this.values = values;
 	}
-	public Map<String,String> getParams(){
+	public Map<String,String> getHeaderParams(){
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("methodName",this.methodName);
 		params.put("clazz", this.clazz);

@@ -13,6 +13,6 @@
 	url="http://192.168.0.73:8080/rpc-server/com.xw.server.TaskDataService;http://192.168.0.25:8080/rpc-server/com.xw.server.TaskDataService"/> -->
 
 	<rpcCommon:rpcCommonClient interfaceClass="com.test.rpc.UserService" 
-	url="http://127.0.0.1:80/rpc-server/" protocol="jsonRPC"/>
+	url="http://127.0.0.1:80/rpc-server/" protocol="hessian"/>
 
 </beans>  
