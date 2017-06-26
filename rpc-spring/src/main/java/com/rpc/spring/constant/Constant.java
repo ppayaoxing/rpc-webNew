@@ -13,4 +13,8 @@ public class Constant {
 	public final static String PROTOCOL= "protocol";
 	public final static String CLUSTER = "cluster";
 	public final static String BALANCE = "balance";
+	
+	public final static String PORT = "port";
+	public final static String IP = "ip";
+	public final static String WEBAPP = "webApp";
 }

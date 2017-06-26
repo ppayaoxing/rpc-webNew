@@ -67,4 +67,16 @@
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
+	
+		<xsd:element name="register">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">					
+					<xsd:attribute name="ip" type="xsd:string" use="optional" default="127.0.0.1"/>
+					<xsd:attribute name="port" type="xsd:string" use="optional" default="8080"/>		
+					<xsd:attribute name="webApp" type="xsd:string" use="optional" default="server" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
 </xsd:schema>

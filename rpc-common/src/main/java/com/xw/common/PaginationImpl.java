@@ -18,7 +18,7 @@ public class PaginationImpl<T> implements Pagination<T>,Serializable{
     private final int pageSize;
 
     public PaginationImpl(int totalCount, int pageNo, int pageSize) {
-        this.objects = new ArrayList();
+        this.objects = new ArrayList<>();
         this.totalCount = totalCount;
         this.pageNo = pageNo;
         this.pageSize = pageSize;

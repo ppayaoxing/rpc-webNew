@@ -54,12 +54,12 @@
     </servlet-mapping> -->
     
     <servlet>
-    	<servlet-name>hessian</servlet-name>
+    	<servlet-name>server</servlet-name>
     	<servlet-class>com.rpc.http.ServerDispatcher</servlet-class>
     	 <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-    	<servlet-name>hessian</servlet-name>
+    	<servlet-name>server</servlet-name>
     	<url-pattern>/*</url-pattern>
     </servlet-mapping>
 	

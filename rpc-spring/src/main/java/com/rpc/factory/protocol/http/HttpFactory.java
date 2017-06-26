@@ -62,17 +62,19 @@ class Handler implements InvocationHandler {
 		this.factory.getParams().setValues(args);
 		//发送请求
 		byte[] data = new byte[]{};
+		int statusCode = 0;
 		try(ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(baos)) {
-			data = baos.toByteArray();
 			oos.writeObject(this.factory.getParams());
+			data = baos.toByteArray();			
+			ByteArrayInputStream bis = new ByteArrayInputStream(data);
+			post.setRequestEntity(new InputStreamRequestEntity(bis));
+			statusCode = httpClient.executeMethod(post);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		//获取响应
-		try (ByteArrayInputStream bis = new ByteArrayInputStream(data)){
-			post.setRequestEntity(new InputStreamRequestEntity(bis));
-			int statusCode = httpClient.executeMethod(post);
+		try {
 			if(statusCode != HttpStatus.SC_OK){
 				throw new Exception("响应码：" + statusCode);
 			}

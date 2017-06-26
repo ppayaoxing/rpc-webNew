@@ -15,6 +15,9 @@ public class ParamsData implements Serializable{
 	private Class<?>[] parameterTypes;
 	private Object[] values;
 	
+	public ParamsData() {
+		super();
+	}
 	public ParamsData(String clazz, String methodName, int timeout,String clusterKey,Class<?>[] parameterTypes,Object[] values) {
 		super();
 		this.clazz = clazz;
@@ -42,26 +45,32 @@ public class ParamsData implements Serializable{
 		return parameterTypes;
 	}
 	
-	public void setClazz(String clazz) {
+	public ParamsData setClazz(String clazz) {
 		this.clazz = clazz;
+		return this;
 	}
-	public void setMethodName(String methodName) {
+	public ParamsData setMethodName(String methodName) {
 		this.methodName = methodName;
+		return this;
 	}
-	public void setTimeout(int timeout) {
+	public ParamsData setTimeout(int timeout) {
 		this.timeout = timeout;
+		return this;
 	}
-	public void setClusterKey(String clusterKey) {
+	public ParamsData setClusterKey(String clusterKey) {
 		this.clusterKey = clusterKey;
+		return this;
 	}
-	public void setParameterTypes(Class<?>[] parameterTypes) {
+	public ParamsData setParameterTypes(Class<?>[] parameterTypes) {
 		this.parameterTypes = parameterTypes;
+		return this;
 	}
 	public Object[] getValues() {
 		return values;
 	}
-	public void setValues(Object[] values) {
+	public ParamsData setValues(Object[] values) {
 		this.values = values;
+		return this;
 	}
 	public Map<String,String> getHeaderParams(){
 		Map<String,String> params = new HashMap<String,String>();

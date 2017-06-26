@@ -544,3 +544,9 @@ Caused by: java.lang.ClassNotFoundException: com.prc.user.impl.UserServiceImpl
 [INFO] [2017-04-19 18:02:47][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
 [INFO] [2017-04-19 18:02:48][com.mchange.v2.log.MLog]MLog clients using log4j logging.
 [INFO] [2017-04-19 18:02:48][com.mchange.v2.c3p0.C3P0Registry]Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+[INFO] [2017-06-20 17:19:17][org.springframework.context.support.ClassPathXmlApplicationContext]Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@762efe5d: startup date [Tue Jun 20 17:19:17 CST 2017]; root of context hierarchy
+[INFO] [2017-06-20 17:19:17][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [appliactionContextClient.xml]
+[INFO] [2017-06-20 17:19:53][org.springframework.context.support.ClassPathXmlApplicationContext]Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@762efe5d: startup date [Tue Jun 20 17:19:53 CST 2017]; root of context hierarchy
+[INFO] [2017-06-20 17:19:53][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [appliactionContextClient.xml]
+[INFO] [2017-06-20 17:20:56][org.springframework.context.support.ClassPathXmlApplicationContext]Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@762efe5d: startup date [Tue Jun 20 17:20:56 CST 2017]; root of context hierarchy
+[INFO] [2017-06-20 17:20:56][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [appliactionContextClient.xml]

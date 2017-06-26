@@ -27,7 +27,7 @@ public class RpcConfigClient implements FactoryBean<Object>,InitializingBean {
 	private String name;//名称	
 	private String interfaceClass;//接口	
 	private String url;//地址	
-	private Object proxyObj;
+	private Object proxyObj = null;
 	
 	private String cluster="failover";//请求机制
 	private String balance="round";//负载均衡
@@ -106,7 +106,8 @@ public class RpcConfigClient implements FactoryBean<Object>,InitializingBean {
 
 	@Override
 	public Object getObject() throws Exception {
-		createProxy();
+		if(proxyObj == null)
+			createProxy();	
 		return proxyObj;
 	}
 
