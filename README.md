@@ -9,3 +9,5 @@
 4.自定义spring 标签 并和hessian整合 实现rpc通信框架 并具有负载均衡和异常重试机制
 
 5.spring和quartz整合实现自定义任务，结合数据库的乐观锁，字符串同步机制可以实现分布式任务
+
+6.需要依赖 jsonrpc 源代码地址：https://github.com/w350491385/jsonrpc4j
