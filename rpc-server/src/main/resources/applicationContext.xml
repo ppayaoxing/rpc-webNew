@@ -15,7 +15,7 @@
      <!-- 自动扫描 -->  
     <context:component-scan base-package="com.xw" />
     
-    <rpcCommon:register ip="127.0.0.1" port="8080" webApp="rpc-admin" />
+    <rpcCommon:register ip="192.168.1.5" port="80" webApp="rpc-server" group="server" adminUrl="http://192.168.1.5:8080/rpc-admin/"/>
     
     <!-- 配置文件 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -71,7 +71,7 @@
     <bean id="userDowngradeProcessorImpl" class="test.rpc.UserDowngradeProcessorImpl"/>
     <bean id="userServiceImpl" class="test.rpc.impl.UserServiceImpl"/>
 	<rpcCommon:rpcCommonServer interfaceClass="test.rpc.UserService" ref="userServiceImpl" 
-			downgrade="true" downgradeProcessor="userDowngradeProcessorImpl" protocol="hessian"/>
+			downgrade="false" downgradeProcessor="userDowngradeProcessorImpl" protocol="hessian"/>
      
      <bean id="taskDataServiceImpl" class="com.xw.server.impl.TaskDataServiceImpl"/>
      <rpcCommon:rpcCommonServer interfaceClass="com.xw.server.TaskDataService" ref="taskDataServiceImpl" />

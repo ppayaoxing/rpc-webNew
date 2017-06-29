@@ -1,12 +1,11 @@
 package com.admin.common;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Vector;
 
 /**
- * 
- * @author Administrator
- *
  */
 public class ServerInfoData {
 	
@@ -16,6 +15,8 @@ public class ServerInfoData {
 	private Vector<Long> aliveList = new Vector<>();  
 	private boolean alive;//false:死了;true:活的
 	private long lasteHitTime;//最后一次心跳时间 (秒)
+	
+	private String date;//
 	
 	public ServerInfoData() {
 		super();
@@ -30,6 +31,8 @@ public class ServerInfoData {
 					if(System.currentTimeMillis()/1000 - lastTime > 3){
 						if(System.currentTimeMillis()/1000 - getLasteHitTime() >60*10){
 							setAlive(false);
+						}else{
+							setAlive(true);
 						}
 					}else{
 						try {
@@ -45,6 +48,11 @@ public class ServerInfoData {
 		return this;
 	}
 	
+	
+	public String getDate() {
+		return date;
+	}
+
 	public ServerInfoData(String ip, String port, String webApp,  boolean alive,
 			long lasteHitTime) {
 		super();
@@ -53,6 +61,7 @@ public class ServerInfoData {
 		this.webApp = webApp;
 		this.alive = alive;
 		this.lasteHitTime = lasteHitTime;
+		this.date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date(this.lasteHitTime*1000));
 	}
 	public String getIp() {
 		return ip;
@@ -91,6 +100,7 @@ public class ServerInfoData {
 	
 	public void hitHeart(long lastTime){
 		this.lasteHitTime = lastTime;
+		this.date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date(this.lasteHitTime*1000));
 		aliveList.add(lastTime);
 		Collections.sort(aliveList);
 		if(aliveList.size() > 1000){
@@ -102,5 +112,8 @@ public class ServerInfoData {
 		return ip+":"+port+"/"+webApp;
 	}
 	
+	public String getUrl(){
+		return "http://"+ip+":"+port+"/"+webApp;
+	}
 
 }

@@ -15,6 +15,9 @@ public class ObjectCacheUtils {
 	
 	private static List<InterceptorRule> rules = new ArrayList<InterceptorRule>();
 	
+	//分组的url
+	private static ConcurrentHashMap<String,List<String>> groupUrlMap = new ConcurrentHashMap<>();
+	
 	public static void put(String clazzName,String clusterKey){
 		Vector<String> vector = objectCache.get(clazzName);
 		if(vector == null)
@@ -71,5 +74,33 @@ public class ObjectCacheUtils {
 			text = text.substring(0,text.length()-1);
 		}
 		return text;
+	}
+	
+	public static void addUrls(String group,List<String> urls){
+		List<String> urlList = groupUrlMap.get(group);
+		if(urlList == null)
+			urlList = new ArrayList<>();
+		groupUrlMap.put(group, urlList);
+		for(String url:urls){
+			if(!urlList.contains(url))
+				urlList.add(url);
+		}
+	}
+	
+	public static void addUrl(String group ,String url){
+		List<String> urls = groupUrlMap.get(group);
+		if(urls == null)
+			urls = new ArrayList<>();
+		groupUrlMap.put(group, urls);
+		if(!urls.contains(url)){
+			urls.add(url);
+		}		
+	}
+	
+	public static List<String> getUrls(String group){
+		List<String> urls = groupUrlMap.get(group);
+		if(urls == null)
+			urls = new ArrayList<>();
+		return urls;
 	}
 }

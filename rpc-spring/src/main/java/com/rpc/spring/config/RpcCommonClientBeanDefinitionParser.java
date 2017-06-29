@@ -58,6 +58,7 @@ private static Logger logger = LoggerFactory.getLogger(RpcCommonClientBeanDefini
 		rootBean.getPropertyValues().add(Constant.PROTOCOL, element.getAttribute(Constant.PROTOCOL));
 		rootBean.getPropertyValues().add(Constant.CLUSTER, element.getAttribute(Constant.CLUSTER));
 		rootBean.getPropertyValues().add(Constant.BALANCE, element.getAttribute(Constant.BALANCE));
+		rootBean.getPropertyValues().add(Constant.GROUP, element.getAttribute(Constant.GROUP));
 		return rootBean;
 	}
 

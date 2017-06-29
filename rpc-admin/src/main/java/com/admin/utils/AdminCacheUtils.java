@@ -1,6 +1,7 @@
 package com.admin.utils;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,6 +28,10 @@ public class AdminCacheUtils {
 		return null;
 	}
 	
+	public static Map<String,Class<?>> getInterfaceToClass(){
+		return interfaceToClass;
+	}
+	
 	public static void addServer(ServerInfoData serverInfoData){
 		if(!serverList.containsKey(serverInfoData.getId())){
 			serverList.put(serverInfoData.getId(), serverInfoData);
@@ -37,6 +42,14 @@ public class AdminCacheUtils {
 			return serverList.get(serverId);
 		}
 		return null;
+	}
+	
+	public static boolean containServerId(String serverId){
+		return serverList.contains(serverId);
+	}
+	
+	public static Map<String,ServerInfoData> getServerList(){
+		return serverList;
 	}
 	
 	public static void addUrl(String group ,String url){
@@ -58,5 +71,9 @@ public class AdminCacheUtils {
 			str.append(key).append(";");
 		}
 		return str.toString().endsWith(";")?str.toString().substring(0,str.toString().length() - 1):str.toString();
+	}
+	
+	public static Map<String,Set<String>> getUrls(){
+		return urls;
 	}
 }

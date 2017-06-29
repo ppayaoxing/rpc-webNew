@@ -63,6 +63,7 @@
 					<xsd:attribute name="balance" type="xsd:string" use="optional" default="round" />
 					<xsd:attribute name="protocol" type="xsd:string" use="optional" default="hessian" />
 					<xsd:attribute name="timeout" type="xsd:integer" use="optional" default="10000" />
+					<xsd:attribute name="group" type="xsd:string" use="optional" default="" />
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
@@ -75,6 +76,8 @@
 					<xsd:attribute name="ip" type="xsd:string" use="optional" default="127.0.0.1"/>
 					<xsd:attribute name="port" type="xsd:string" use="optional" default="8080"/>		
 					<xsd:attribute name="webApp" type="xsd:string" use="optional" default="server" />
+					<xsd:attribute name="group" type="xsd:string" use="optional" default="" />
+					<xsd:attribute name="adminUrl" type="xsd:string" use="optional" default="" />
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>

@@ -61,16 +61,19 @@ public class RequestUtils {
 			e.printStackTrace();
 		}
 		// 获取响应
+		ObjectInputStream objIn = null;
 		try {
 			if (statusCode != HttpStatus.SC_OK) {
 				throw new Exception("响应码：" + statusCode);
 			}
-			ObjectInputStream objIn = new ObjectInputStream(post.getResponseBodyAsStream());
+			objIn = new ObjectInputStream(post.getResponseBodyAsStream());
 			Object result = objIn.readObject();
 			return result;
 		} catch (Exception e) {
 			throw e;
 		} finally {
+			if(objIn != null)
+				objIn.close();
 			post.releaseConnection();
 		}
 	}

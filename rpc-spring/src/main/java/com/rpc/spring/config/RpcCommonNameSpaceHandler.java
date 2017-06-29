@@ -15,7 +15,7 @@ public class RpcCommonNameSpaceHandler extends NamespaceHandlerSupport {
 	public void init() {
 		registerBeanDefinitionParser("rpcCommonServer", new RpcCommonServerBeanDefinitionParser(RpcConfigServer.class,false));
 		registerBeanDefinitionParser("rpcCommonClient", new RpcCommonClientBeanDefinitionParser(RpcConfigClient.class,false));
-		registerBeanDefinitionParser("register", new RpcCommonClientBeanDefinitionParser(RegisterConfig.class,false));
+		registerBeanDefinitionParser("register", new RpcCommonRegisterBeanDefinitionParser(RegisterConfig.class,false));
 	}
 
 }

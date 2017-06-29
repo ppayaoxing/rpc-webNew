@@ -12,7 +12,7 @@
 	<!-- <rpcCommon:rpcCommonClient interfaceClass="com.xw.server.TaskDataService" 
 	url="http://192.168.0.73:8080/rpc-server/com.xw.server.TaskDataService;http://192.168.0.25:8080/rpc-server/com.xw.server.TaskDataService"/> -->
 
-	<rpcCommon:rpcCommonClient interfaceClass="test.rpc.UserService" 
-	url="http://127.0.0.1:80/rpc-server/" protocol="hessian"/>
+<rpcCommon:register adminUrl="http://192.168.1.5:8080/rpc-admin/"/>
+	<rpcCommon:rpcCommonClient interfaceClass="test.rpc.UserService" protocol="hessian" group="server"/>
 
 </beans>  

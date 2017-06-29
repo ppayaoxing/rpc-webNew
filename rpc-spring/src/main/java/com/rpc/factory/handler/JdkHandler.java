@@ -15,24 +15,24 @@ public class JdkHandler implements Handler {
 	private Protocol protocol;//协议
 	private Balance balance;//负载均衡
 	private Class<?> clazz;//代理对象字节
-	private String url;//地址
 	private int timeout;
 	private String interfaceClass; 
+	private String group;
 	
-	public JdkHandler(Cluster cluster, Protocol protocol, Class<?> clazz, String url,Balance balance,int timeout,String interfaceClass) {
+	public JdkHandler(Cluster cluster, Protocol protocol, Class<?> clazz, Balance balance,int timeout,String interfaceClass,String group) {
 		super();
 		this.cluster = cluster;
 		this.protocol = protocol;
 		this.clazz = clazz;
-		this.url = url;
 		this.balance = balance;
 		this.timeout = timeout;
 		this.interfaceClass = interfaceClass;
+		this.group =  group;
 	}
 
 	@Override
 	public Object exec(Method method, Object[] args) throws Exception {
-		return cluster.cluster(balance,protocol, new RpcData(method, args,clazz, url,this.timeout,this.interfaceClass));
+		return cluster.cluster(balance,protocol, new RpcData(method, args,clazz, this.timeout,this.interfaceClass,this.group));
 	}
 
 }

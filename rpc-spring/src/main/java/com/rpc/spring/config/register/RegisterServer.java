@@ -28,13 +28,13 @@ public class RegisterServer {
 		return this;
 	}
 	
-	public void Register(){
+	public void register(){
 		try{
-			RequestUtils.send(register.getUrl(), new ParamsData()
+			RequestUtils.send(register.getAdminUrl(), new ParamsData()
 				.setClazz("com.admin.web.AdminService")
 				.setMethodName("Register")
-				.setParameterTypes(new Class<?>[]{String.class,String.class,String.class})
-				.setValues(new Object[]{"127.0.0.1","80","server"})
+				.setParameterTypes(new Class<?>[]{String.class,String.class,String.class,String.class})
+				.setValues(new Object[]{register.getIp(),register.getPort(),register.getWebApp(),register.getGroup()})
 				.setTimeout(3000));
 		}catch(Exception e){
 			e.printStackTrace();
@@ -43,11 +43,11 @@ public class RegisterServer {
 	
 	public void hitHeart(){
 		try {
-			RequestUtils.send(register.getUrl(), new ParamsData()
+			RequestUtils.send(register.getAdminUrl(), new ParamsData()
 					.setClazz("com.admin.web.AdminService")
 					.setMethodName("hitHeat")
 					.setParameterTypes(new Class<?>[]{String.class,Long.class})
-					.setValues(new Object[]{register.getId(),System.currentTimeMillis()/1000})
+					.setValues(new Object[]{register.getId()})
 					.setTimeout(2000));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class RegisterServer {
 	public String getUrls(String group){
 		String urls = null;
 		try {
-			urls = (String) RequestUtils.send(register.getUrl(), new ParamsData()
+			urls = (String) RequestUtils.send(register.getAdminUrl(), new ParamsData()
 					.setClazz("com.admin.web.AdminService")
 					.setMethodName("getUrls")
 					.setParameterTypes(new Class<?>[]{String.class})
@@ -69,17 +69,25 @@ public class RegisterServer {
 		return urls;
 	}
 	
-//	public static void main(String[] args) {
-//		try{
-//			RegisterBean register = new RegisterBean("127.0.0.1", "8080", "rpc-admin");
-//			RequestUtils.send(register.getUrl(), new ParamsData()
+	public static void main(String[] args) {
+		try{
+			RegisterBean register = new RegisterBean("192.168.1.5", "80", "server","server","http://192.168.1.5:8080/rpc-admin");
+//			RequestUtils.send(register.getAdminUrl(), new ParamsData()
 //					.setClazz("com.admin.web.AdminService")
 //					.setMethodName("Register")
-//					.setParameterTypes(new Class<?>[]{String.class,String.class,String.class})
-//					.setValues(new Object[]{"127.0.0.1","80","server"})
+//					.setParameterTypes(new Class<?>[]{String.class,String.class,String.class,String.class})
+//					.setValues(new Object[]{"192.168.1.5","80","server","server"})
 //					.setTimeout(3000));
-//			}catch(Exception e){
-//				e.printStackTrace();
-//			}
-//	}
+			RegisterServer.getRegisterServer().setRegister(register);
+			
+			RegisterServer.getRegisterServer().register();
+			
+			RegisterServer.getRegisterServer().hitHeart();
+			
+			String url = RegisterServer.getRegisterServer().getUrls("server");
+			System.out.println(url);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	}
 }

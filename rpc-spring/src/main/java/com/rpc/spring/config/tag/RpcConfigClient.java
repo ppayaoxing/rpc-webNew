@@ -39,7 +39,16 @@ public class RpcConfigClient implements FactoryBean<Object>,InitializingBean {
 	private BalanceFactory balanceFactory = BalanceFactory.getBalanceFactory();//负载均衡
 	private int timeout = 10*60*1000;
 
+	private String group;//
 	
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
 	public String getProtocol() {
 		return protocol;
 	}
@@ -96,9 +105,9 @@ public class RpcConfigClient implements FactoryBean<Object>,InitializingBean {
 		this.interfaceClass = interfaceClass;
 	}
 
-	public String getUrl() {
-		return url;
-	}
+//	public String getUrl() {
+//		return RegisterServer.getRegisterServer().getUrls(this.group);
+//	}
 
 	public void setUrl(String url) {
 		this.url = url;
@@ -118,7 +127,7 @@ public class RpcConfigClient implements FactoryBean<Object>,InitializingBean {
 		Handler handler;
 		try {
 			handler = new JdkHandler(clusterFactory.getCluster(this.cluster), 
-					protocolFactory.getProtocol(protocol), getObjectType(), this.url,balanceFactory.getBalance(balance),this.timeout,this.interfaceClass);
+					protocolFactory.getProtocol(protocol), getObjectType(),balanceFactory.getBalance(balance),this.timeout,this.interfaceClass,this.group);
 			this.proxyObj = Proxy.newProxyInstance(ClassUtils.getDefaultClassLoader(), new Class<?>[]{getObjectType()},
 					proxyFactory.getProxy(handler));
 		} catch (Exception e) {

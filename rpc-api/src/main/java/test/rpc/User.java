@@ -38,4 +38,7 @@ public class User implements Serializable {
 		this.address = address;
 	}
 	
+	public String toString(){
+		return this.id+":"+this.name+":"+this.age+":"+this.address;
+	}
 }

@@ -50,6 +50,8 @@ public class RpcCommonRegisterBeanDefinitionParser implements BeanDefinitionPars
 		rootBean.getPropertyValues().add(Constant.IP,element.getAttribute(Constant.IP));
 		rootBean.getPropertyValues().add(Constant.PORT, element.getAttribute(Constant.PORT));
 		rootBean.getPropertyValues().add(Constant.WEBAPP, element.getAttribute(Constant.WEBAPP));
+		rootBean.getPropertyValues().add(Constant.GROUP, element.getAttribute(Constant.GROUP));
+		rootBean.getPropertyValues().add(Constant.ADMINURL, element.getAttribute(Constant.ADMINURL));
 		return rootBean;
 	}
 

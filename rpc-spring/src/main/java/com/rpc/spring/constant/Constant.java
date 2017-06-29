@@ -17,4 +17,6 @@ public class Constant {
 	public final static String PORT = "port";
 	public final static String IP = "ip";
 	public final static String WEBAPP = "webApp";
+	public final static String GROUP = "group";
+	public final static String ADMINURL = "adminUrl";
 }
